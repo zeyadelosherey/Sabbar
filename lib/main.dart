@@ -14,19 +14,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MultiProvider(
+
       providers: [
         ChangeNotifierProvider<HomeProvider>.value(
             value: HomeProvider()
         ),
-
-
       ],
+
       child: MaterialApp(
         title: 'Handover',
         theme: ThemeData(
           primaryColor: Constants.appOrange,
-
         ),
+
         home: SplashScreenPage(),
 
         routes: {

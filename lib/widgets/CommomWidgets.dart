@@ -34,7 +34,7 @@ class CommonWidgets{
               imageUrl: "https://scontent-hbe1-1.xx.fbcdn.net/v/t1.0-9/69810320_100605981323755_90273817355616256_n.jpg?_nc_cat=103&_nc_sid=85a577&_nc_oc=AQl9EMdWBS40MaTgllSFsCSW-C3URhCPI7gSzDO5MgKuwu35VdvCoqCiQ8Uo3JXCS3w&_nc_ht=scontent-hbe1-1.xx&oh=091ef64824996dcf1afdf91c387ef23b&oe=5E94542C",
               placeholder: (context, url) => Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Constants.appOrange),)),
               errorWidget: (context, url, error) => Image.asset(
-                "assets/images/place.png",
+                "assets/images/pickup.png",
                 fit: BoxFit.cover,
               ),
               fit: BoxFit.cover,

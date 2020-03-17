@@ -27,7 +27,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> with TickerProvider
       if(state.index == 3 )
        Navigator.pushReplacementNamed(context, "/HomePage");
     });
-
     textAnimation.addListener((){setState(() {});});
     textAnimationController.forward();
 

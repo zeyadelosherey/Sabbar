@@ -143,7 +143,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                 child: IconButton(icon: Icon(Icons.arrow_back, color: Colors.black, size: 30,), onPressed: () {}),
               ),
 
-
                homeProvider.getShowOrderTrackWidget()
                    ?
                      CommonWidgets.slideWidget(panelAnimation ,imageAnimation , panelController , 270.0 , trackOrderWidget(homeProvider.getPoint().index) )

@@ -35,7 +35,6 @@ class HomeProvider with ChangeNotifier {
 
 
   Future changeDriverPosition(flutterLocalNotificationsPlugin , controller , ){
-
     //Change driver location
      int i = 0 ;
      Timer.periodic(Duration(seconds: 2),  (timer){
