@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sabbar/Providers/HomeProvider.dart';
-import 'package:sabbar/UI/HomePage.dart';
-import 'package:sabbar/UI/SplashScreenPage.dart';
-import 'package:sabbar/Utils/Constants.dart';
+import 'package:sabbar/providers/HomeProvider.dart';
+import 'package:sabbar/screens/HomePage.dart';
+import 'package:sabbar/screens/SplashScreenPage.dart';
+import 'package:sabbar/utilities/Constants.dart';
 
 void main() => runApp(MyApp());
 

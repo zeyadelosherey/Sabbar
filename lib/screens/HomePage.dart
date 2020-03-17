@@ -1,19 +1,16 @@
 import 'dart:async';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:provider/provider.dart';
-import 'package:sabbar/Providers/HomeProvider.dart';
-import 'package:sabbar/Utils/Constants.dart';
-import 'package:sabbar/Utils/Helpers.dart';
-import 'package:sabbar/WidgetHelper/CommomWidgets.dart';
+import 'package:sabbar/providers/HomeProvider.dart';
 
-import 'package:sabbar/WidgetHelper/SlidingPanel.dart';
-import 'package:sabbar/WidgetHelper/Steps.dart';
+import 'package:sabbar/utilities/Constants.dart';
+import 'package:sabbar/widgets/CommomWidgets.dart';
+import 'package:sabbar/widgets/SlidingPanel.dart';
+import 'package:sabbar/widgets/Steps.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -37,6 +34,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   @override
   void initState() {
     // TODO: implement initState
+
     initialization();
     super.initState();
 
@@ -154,20 +152,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 
 
 
-    void initialization() {
-       BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(64, 64)), 'assets/images/delivery.png').then((icon){
-        deliveryIcon = icon;
-      });
-       BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(64, 64)), 'assets/images/pickup.png').then((icon){
-         pickupIcon = icon;
-       });
-       BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(64, 64)), 'assets/images/pin.png').then((icon){
-         driverIcon = icon;
-       });
+    Future<void> initialization() async {
+
 
 
        panelController  = new PanelController();
-       panelAnimationController = AnimationController(vsync: this , duration: Duration(milliseconds: 1500));
+       panelAnimationController = AnimationController(vsync: this , duration: Duration(milliseconds: 1200));
        imageAnimationController = AnimationController(vsync: this , duration: Duration(seconds: 3));
        panelAnimation = Tween<double>(begin: 0.0 , end: 1.0).animate(CurvedAnimation(parent: panelAnimationController, curve: Curves.easeInOutCubic));
        panelAnimation.addStatusListener((state) {});
@@ -185,6 +175,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
        var ios = new IOSInitializationSettings();
        var platform = new InitializationSettings(android, ios);
        flutterLocalNotificationsPlugin.initialize(platform);
+
+
+
+
+       
+
+      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5) ,  'assets/images/delivery.png').then((icon){
+        deliveryIcon = icon;
+      });
+      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5) , 'assets/images/pickup.png').then((icon){
+         pickupIcon = icon;
+      });
+      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5), 'assets/images/pin.png').then((icon){
+         driverIcon = icon;
+      });
 
   }
 

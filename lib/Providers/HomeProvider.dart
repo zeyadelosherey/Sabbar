@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sabbar/Model/HomeModel.dart';
-import 'package:sabbar/Utils/Helpers.dart';
+import 'package:sabbar/services/HomeServices.dart';
+import 'package:sabbar/utilities/Helpers.dart';
 
 
 
@@ -17,10 +17,10 @@ enum Point {
 
 class HomeProvider with ChangeNotifier {
 
-  LatLng _delivery = HomeModel.delivery ;
-  LatLng _pickup = HomeModel.pickup ;
-  LatLng _driver = HomeModel.driver  ;
-  List<LatLng> _driverPath = HomeModel.driverPath;
+  LatLng _delivery = HomeServices.delivery ;
+  LatLng _pickup = HomeServices.pickup ;
+  LatLng _driver = HomeServices.driver  ;
+  List<LatLng> _driverPath = HomeServices.driverPath;
   Point _point = Point.WAY;
   bool _showOrderTrackWidget = true;
 
@@ -49,13 +49,12 @@ class HomeProvider with ChangeNotifier {
        notifyListeners();
        i++;
 
-
        //Check positions of driver
        if(_pickup == _driver){
          Helpers.showNotification("driver at point", flutterLocalNotificationsPlugin);
          _point = Point.PICKUP;
        }else if(_delivery == _driver){
-         Helpers.showNotification("driver here", flutterLocalNotificationsPlugin);
+         Helpers.showNotification("driver arrived", flutterLocalNotificationsPlugin);
        _point = Point.DELIVERED;
        _showOrderTrackWidget = false;
        }

@@ -1,6 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class HomeModel {
+class HomeServices {
 
   static LatLng pickup = LatLng(30.0424726,30.9754028);
   static LatLng delivery =  LatLng(29.9362123,30.9148672);

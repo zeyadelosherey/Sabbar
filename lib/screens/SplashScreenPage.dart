@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:sabbar/Utils/Constants.dart';
+import 'package:sabbar/utilities/Constants.dart';
 
 class SplashScreenPage extends StatefulWidget {
   SplashScreenPage({Key key}) : super(key: key);
