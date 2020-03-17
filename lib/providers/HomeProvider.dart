@@ -43,7 +43,7 @@ class HomeProvider with ChangeNotifier {
        controller.animateCamera(CameraUpdate.newCameraPosition(
          CameraPosition(
              target:  _driver,
-             zoom: 11
+             zoom: 12
          ),
        ));
        notifyListeners();
