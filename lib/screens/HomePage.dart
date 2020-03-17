@@ -142,8 +142,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
               ),
 
 
-               homeProvider.getShowOrderTrackWidget() ?  trackOrderWidget(homeProvider.getPoint().index) : orderRatingWidget()
-            ],
+               homeProvider.getShowOrderTrackWidget()
+                   ?
+                     CommonWidgets.slideWidget(panelAnimation ,imageAnimation , panelController , 270.0 , trackOrderWidget(homeProvider.getPoint().index) )
+                   :
+                     CommonWidgets.slideWidget(panelAnimation ,imageAnimation , panelController , 400.0 , orderRatingWidget() )
+
+    ],
     ),
 
 
@@ -157,8 +162,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 
 
        panelController  = new PanelController();
-       panelAnimationController = AnimationController(vsync: this , duration: Duration(milliseconds: 1200));
-       imageAnimationController = AnimationController(vsync: this , duration: Duration(seconds: 3));
+       panelAnimationController = AnimationController(vsync: this , duration: Duration(milliseconds: 1100));
+       imageAnimationController = AnimationController(vsync: this , duration: Duration(milliseconds: 1200));
        panelAnimation = Tween<double>(begin: 0.0 , end: 1.0).animate(CurvedAnimation(parent: panelAnimationController, curve: Curves.easeInOutCubic));
        panelAnimation.addStatusListener((state) {});
        panelAnimation.addListener((){setState(() {});});
@@ -169,17 +174,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
        imageAnimationController.forward();
 
 
-
-
        var android = new AndroidInitializationSettings('mipmap/ic_launcher');
        var ios = new IOSInitializationSettings();
        var platform = new InitializationSettings(android, ios);
        flutterLocalNotificationsPlugin.initialize(platform);
 
 
-
-
-       
 
       BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5) ,  'assets/images/delivery.png').then((icon){
         deliveryIcon = icon;
@@ -196,139 +196,101 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 
   //@TODO Create Track order widget
   Widget trackOrderWidget(step){
-    return Stack(
-      alignment:Alignment.center,
-      children: <Widget>[
-        SlidingUpPanel(
-          minHeight: panelAnimation.value*270,
-          maxHeight: 270,
-          controller: panelController,
-          color: Constants.appOrange,
-          borderRadius: BorderRadius.only(topRight: Radius.circular(35), topLeft: Radius.circular(35)),
-          panel: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 80,),
-                  Text("Mohamed Abdullah" , style: TextStyle(color: Constants.appBlack , fontSize: 16 , fontWeight: FontWeight.bold),),
-                  SizedBox(height: 25,),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50 , right: 50),
-                    child: Steps(
-                      selectedStep: step,
-                      nbSteps: 4,
-                      isHorizontal: false,
-                      lineLength: 25,
-                      selectedStepSize:10,
-                      unselectedStepSize: 10,
-                      doneStepSize: 10,
-                      selectedStepColorIn: Constants.appBlack,
-                      selectedStepColorOut: Constants.appBlack,
-                      doneLineColor:  Constants.appBlack,
-                      doneStepColor: Constants.appBlack,
-                      undoneLineColor: Constants.appLineColor ,
-                      unselectedStepColor: Constants.appLineColor ,
-                      stepTitle: ['On the way' ,'Pick up delivery' ,'Near delivery destination' ,'Delivered Package'],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-        CommonWidgets.slideImageWidget(imageAnimation , 210.0 )
-      ],
+    return Padding(
+        padding: const EdgeInsets.only(left: 50, right: 50),
+        child: Steps(
+          selectedStep: step,
+          nbSteps: 4,
+          isHorizontal: false,
+          lineLength: 25,
+          selectedStepSize: 10,
+          unselectedStepSize: 10,
+          doneStepSize: 10,
+          selectedStepColorIn: Constants.appBlack,
+          selectedStepColorOut: Constants.appBlack,
+          doneLineColor: Constants.appBlack,
+          doneStepColor: Constants.appBlack,
+          undoneLineColor: Constants.appLineColor,
+          unselectedStepColor: Constants.appLineColor,
+          stepTitle: [
+            'On the way',
+            'Pick up delivery',
+            'Near delivery destination',
+            'Delivered Package'
+          ],
+        )
+
     );
   }
 
 
   //@TODO Create order rating widget
   Widget orderRatingWidget(){
-    return Stack(
-      alignment:Alignment.center,
-      children: <Widget>[
-        SlidingUpPanel(
-          minHeight: panelAnimation.value*400,
-          maxHeight: 400,
-          controller: panelController,
-          color: Constants.appOrange,
-          borderRadius: BorderRadius.only(topRight: Radius.circular(35), topLeft: Radius.circular(35)),
-          panel: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 80,),
-                  Text("Mohamed Abdullah" , style: TextStyle(color: Constants.appBlack , fontSize: 16 , fontWeight: FontWeight.bold),),
-                  SizedBox(height: 25,),
-                  Column(
-                      children: <Widget>[
-                        RatingBar(
-                          initialRating: 0,
-                          minRating: 0,
-                          direction: Axis.horizontal,
-                          itemSize: 47,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 4.5),
-                          glowColor: Constants.appOrangeRateBar,
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Constants.appOrangeRateBar,
-                          ),
-                          onRatingUpdate: (rating) {
 
-                          },
-                        ),
-                        SizedBox(height: 60,),
-                        CommonWidgets.orderInformationWidget("Pickup Time", "10:00 PM", context),
-                        SizedBox(height: 10,),
-                        CommonWidgets.orderInformationWidget("Delivery Time", "10:30 PM", context),
-                        SizedBox(height: 30,),
-                        CommonWidgets.orderInformationWidget("Total", "", context),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+     return Column(
+          children: <Widget>[
+            RatingBar(
+              initialRating: 0,
+              minRating: 0,
+              direction: Axis.horizontal,
+              itemSize: 47,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.5),
+              glowColor: Constants.appOrangeRateBar,
+              itemBuilder: (context, _) =>
+                  Icon(
+                    Icons.star,
+                    color: Constants.appOrangeRateBar,
+                  ),
+              onRatingUpdate: (rating) {
+
+              },
+            ),
+            SizedBox(height: 60,),
+            CommonWidgets.orderInformationWidget("Pickup Time", "10:00 PM", context),
+            SizedBox(height: 10,),
+            CommonWidgets.orderInformationWidget("Delivery Time", "10:30 PM", context),
+            SizedBox(height: 30,),
+            CommonWidgets.orderInformationWidget("Total", "", context),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(child: Padding(
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6),
+                  child: Container(child: Align(alignment: Alignment.centerLeft, child: Text("\$30.00", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))), height: 40,),), flex: 1,),
+                Expanded(
+                  child: InkWell(
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: Constants.appWhite,
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(25), bottomLeft: Radius.circular(25))),
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Expanded(child: Padding(
-                              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6),
-                              child: Container(child: Align(alignment: Alignment.centerLeft, child: Text("\$30.00", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))), height: 40,),), flex: 1,),
-                            Expanded(child: InkWell(
-                                child: Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(color: Constants.appWhite, borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomLeft: Radius.circular(25))),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Expanded(child: Align(alignment: Alignment.centerRight, child: Text("Submit", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),)), flex: 2,),
-                                        SizedBox(width: 50,),
-                                        Expanded(child: Align(alignment: Alignment.centerLeft, child: Icon(Icons.arrow_forward)), flex: 1,),
-                                      ],
-                                    )
-                                )
-                            ),
-                            )
-
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text("Submit", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),)), flex: 2,),
+                            SizedBox(width: 50,),
+                            Expanded(
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                child: Icon(Icons.arrow_forward)), flex: 1,),
                           ],
                         )
-                      ])
-                ],
-              ),
-            ),
-          ),
-        ),
+                    )
+                ),
+                )
 
-        CommonWidgets.slideImageWidget(imageAnimation , 340.0 )
+              ],
+            )
+          ]);
 
-      ],
-
-
-    );
   }
 
 }

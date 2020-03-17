@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sabbar/utilities/Constants.dart';
+import 'package:sabbar/widgets/SlidingPanel.dart';
+import 'package:sabbar/widgets/Steps.dart';
 
 class CommonWidgets{
   static Widget slideImageWidget(imageAnimation , heightAndWidth){
@@ -57,6 +59,38 @@ class CommonWidgets{
 
         ],
       ),
+    );
+  }
+
+
+
+  static Widget slideWidget(panelAnimation , imageAnimation , panelController , height  , Widget widget ){
+    return Stack(
+      alignment:Alignment.center,
+      children: <Widget>[
+        SlidingUpPanel(
+          minHeight: panelAnimation.value*height,
+          maxHeight: height,
+          controller: panelController,
+          color: Constants.appOrange,
+          borderRadius: BorderRadius.only(topRight: Radius.circular(35), topLeft: Radius.circular(35)),
+          panel: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 80,),
+                  Text("Mohamed Abdullah" , style: TextStyle(color: Constants.appBlack , fontSize: 16 , fontWeight: FontWeight.bold),),
+                  SizedBox(height: 25,),
+                  widget
+                ],
+              ),
+            ),
+          ),
+        ),
+        CommonWidgets.slideImageWidget(imageAnimation , height - 60 )
+      ],
     );
   }
 }
