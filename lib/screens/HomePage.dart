@@ -72,11 +72,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                             markerId: MarkerId("delivery"),
                             position: homeProvider.getDelivery(),
                             icon: deliveryIcon,
+                            zIndex: 1
                           ),
                           Marker(
                               markerId: MarkerId("pickup"),
                               position: homeProvider.getPickup(),
                               icon: pickupIcon,
+                              zIndex: 1
                           ),
 
                           Marker(
@@ -181,13 +183,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 
 
 
-      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5) ,  'assets/images/delivery.png').then((icon){
+      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.0) ,  'assets/images/delivery.png').then((icon){
         deliveryIcon = icon;
       });
-      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5) , 'assets/images/pickup.png').then((icon){
+      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 1.7) , 'assets/images/pickup.png').then((icon){
          pickupIcon = icon;
       });
-      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5), 'assets/images/pin.png').then((icon){
+      BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 1.7), 'assets/images/pin.png').then((icon){
          driverIcon = icon;
       });
 
@@ -264,7 +266,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                 Expanded(
                   child: InkWell(
                       child: Container(
-                        height: 40,
+                        height: 45,
                         decoration: BoxDecoration(
                             color: Constants.appWhite,
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(25), bottomLeft: Radius.circular(25))),
