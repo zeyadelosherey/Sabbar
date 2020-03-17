@@ -14,7 +14,7 @@
         android:label="sabbar"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCF4s1AuUyeaxv0tIqNZ9UXUOlWPA_Sc6I"/>
+            android:value="AIzaSyBl29EA3nyfqeH7Qvpv4JR8li258ZpEoF4"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
